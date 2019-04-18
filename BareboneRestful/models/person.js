@@ -22,10 +22,8 @@ class Persons {
     // The R in cRud - find on firstname 
     read(firstname, cb) {
         this._db.find( (person) => {
-            if( person.firstname === firstname) {
+            if( person === firstname) {
                 cb(null, person);
-            } else {
-                cb(new Error('not found'), null);
             }
         });
     }
