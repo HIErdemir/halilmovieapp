@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // Middelware, logging voor alle request
 app.all('*', function (req, res, next) {
-    logger.info('%s', req.hostname)
+    //logger.info('%s', req.hostname)
     next();
 });
 
@@ -24,3 +24,5 @@ const port = 8080;
 const server = app.listen(port, () => {
     console.log("Hi students of I4, the magic happens ar port " + server.address().port);
 });
+
+module.exports = app;
