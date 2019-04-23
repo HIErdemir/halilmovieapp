@@ -1,28 +1,27 @@
-class Users {
+class User {
+  constructor(email, password, username) {
+    (this.email = this.validateEmail(email)),
+      (this.password = this.validatePassword(password)),
+      (this.username = this.validateUsername(username));
+  }
 
-    constructor() {
-        this._db = []
-    }
-    // The C in Crud. Ter illustratie een optionele callback
-    create(user, cb = null) {
-        this._db.push(user);
-        if( cb !== null ) {
-            cb(null, 'ok');
-        }
-    }
+  // Needs to be private ?
+  validateEmail(email) {
+    return email;
+  }
 
-    // The R in cRud - find all
-    readAll(cb) {
-        cb(null, this._db);
-    }
+  validatePassword(password) {
+    return password;
+  }
 
-    // The R in cRud - find on movie.id 
-    read(id, cb) {
-        this._db.find( (user) => {
-            if( user.id === id) {
-                cb(null, user);
-            }
-        });
+  validateUsername(username) {
+    let regex = new RegExp("^[a-zA-Z0-9]+([_-]?[a-zA-Z0-9])*$");
+    if (regex.test(username)) {
+      return username;
+    } else {
+      throw new Error("Invalid Username: " + username);
     }
+  }
 }
-module.exports = Users
+
+module.exports = User;
