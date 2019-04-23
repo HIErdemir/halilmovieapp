@@ -8,6 +8,11 @@
     "test_org": "echo \"Error: no test specified\" && exit 1",
     "test": "mocha --exit --reporter list"
   },
+  "huskey": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -17,5 +22,9 @@
     "express": "^4.16.4",
     "mocha": "^6.1.4",
     "tracer": "^0.9.8"
+  },
+  "devDependencies": {
+    "prettier": "^1.17.0",
+    "pretty-quick": "^1.10.0"
   }
 }
