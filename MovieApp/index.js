@@ -3,7 +3,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const apiv1 = require("./routes/apiv1");
 const apiv2 = require("./routes/apiv2");
-const logger = require("tracer").colorConsole();
+const logger = require("tracer").dailyfile({
+  root: "./logs",
+  maxLogFiles: 10,
+  allLogsFileName: "movies",
+  format: "{{timestamp}} <{{title}}> {{message}} (in {{file}}:{{line}})",
+  dateformat: "HH:MM:ss.L"
+});
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,7 +17,7 @@ app.use(bodyParser.json());
 
 // Middelware, logging voor alle request
 app.all("*", function(req, res, next) {
-  //logger.info('%s', req.hostname)
+  logger.info("%s", req.hostname);
   next();
 });
 
