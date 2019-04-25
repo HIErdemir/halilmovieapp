@@ -1,8 +1,0 @@
-{
-  "secretkey": "MyServerSuperSecretKey-123454321AbCd-",
-  "dbUsername": "i14",
-  "dbPassword": "i14",
-  "dbSchema": "i14",
-  "dbServer": "localhost",
-  "port": "8080"
-}

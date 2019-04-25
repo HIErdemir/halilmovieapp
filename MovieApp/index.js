@@ -1,4 +1,3 @@
-const config = require("./config/config.json");
 const express = require("express");
 const bodyParser = require("body-parser");
 const apiv1 = require("./routes/apiv1");
@@ -42,7 +41,7 @@ app.use(errorLoggerHandler);
 app.use(errorResponseHandler);
 
 // ECMA 6
-const port = process.env.PORT || config.port;
+const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {
   console.log(
     "Hi students of I4, the magic happens ar port " + server.address().port
