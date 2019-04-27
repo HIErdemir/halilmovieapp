@@ -3,12 +3,28 @@ const assert = require("assert");
 const router = express.Router();
 const Movies = require("../models/movies");
 const User = require("../models/users");
-const _movies = new Movies();
-
 const db = require("../db/mysql-connector");
-
 const bcrypt = require("bcryptjs");
+const auth = require("../auth/authenticate");
+
+const _movies = new Movies();
 const saltRounds = 10;
+
+// Check token except for 'register' and 'login'
+router.all(/^(?!\/login|\/register).*$/, function(req, res, next) {
+  const token = req.header("X-Access-Token") || "";
+  console.log(token);
+
+  auth.decodeToken(token, (err, payload) => {
+    if (err) {
+      console.log("Error handler: " + err.message);
+      next(err);
+      //res.status((err.status || 401 )).json({error: new Error("Not authorised").message});
+    } else {
+      next();
+    }
+  });
+});
 
 //
 // Get all movies
@@ -111,7 +127,8 @@ router.post("/login", function(req, res, next) {
       } else {
         const hash = rows[0].password;
         if (hash !== undefined && bcrypt.compareSync(req.body.password, hash)) {
-          res.status(200).json({ msg: "Welcome back " + req.body.username });
+          token = auth.encodeToken(req.body.username);
+          res.status(200).json({ token: token });
         } else {
           next(new Error("Invalid login, bye"));
         }

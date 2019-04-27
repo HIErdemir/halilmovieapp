@@ -45,7 +45,7 @@ app.use(errorResponseHandler);
 const port = process.env.PORT || config.port;
 const server = app.listen(port, () => {
   console.log(
-    "Hi students of I4, the magic happens ar port " + server.address().port
+    "The Movie app, the magic happens at port " + server.address().port
   );
 });
 
