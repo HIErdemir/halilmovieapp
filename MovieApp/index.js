@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const apiv1 = require("./routes/apiv1");
 const apiv2 = require("./routes/apiv2");
+const auth = require("./routes/auth");
 const logger = require("tracer").dailyfile({
   root: "./logs",
   maxLogFiles: 10,
@@ -21,7 +22,10 @@ app.all("*", function(req, res, next) {
   next();
 });
 
-// Routing with versions
+// Routing without JWT
+app.use("/auth", auth);
+
+// Routing protected by JWT
 app.use("/apiv1", apiv1);
 app.use("/apiv2", apiv2);
 
