@@ -49,6 +49,7 @@ router.post("/register", function(req, res, next) {
     // Perform query
     db.query(query, (err, rows, fields) => {
       if (err) {
+        console.log(err);
         next(err);
       } else {
         res.status(200).json(rows);

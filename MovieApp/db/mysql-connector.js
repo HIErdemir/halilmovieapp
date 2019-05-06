@@ -25,10 +25,10 @@ const reconnectTimeout = 2000; // ms.
 
 const connectionSettings = {
   connectionLimit: 20,
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || config.dbUsername,
-  password: process.env.DB_PASSWORD || config.dbPassword,
-  database: process.env.DB_DATABASE || config.dbSchema,
+  host: process.env.DB_HOST || config.remote.dbServer,
+  user: process.env.DB_USER || config.remote.dbUsername,
+  password: process.env.DB_PASSWORD || config.remote.dbPassword,
+  database: process.env.DB_DATABASE || config.remote.dbSchema,
   port: 3306,
   debug: false
 };

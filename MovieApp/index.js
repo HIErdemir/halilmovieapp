@@ -46,7 +46,7 @@ app.use(errorLoggerHandler);
 app.use(errorResponseHandler);
 
 // ECMA 6
-const port = process.env.PORT || config.port;
+const port = process.env.PORT || config.remote.port;
 const server = app.listen(port, () => {
   console.log(
     "The Movie app, the magic happens at port " + server.address().port
